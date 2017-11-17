@@ -21,9 +21,6 @@ A = [['7', '5', '3', '-5'],
      ['-9', '4', '-5', '9'],
      ['-9', '-10', '5', '-4']]
 
-#change_to_frac(A)
-#print(A)
-
 
 #增广矩阵
 def augmentMatrix(A, b):
@@ -52,12 +49,14 @@ def augmentMatrix(A, b):
 
 
 ###几种初等变换函数
-# TODO r1 <---> r2
+# 第一种变换：对换 
+#TODO r1 <---> r2
 # 直接修改参数矩阵，无返回值
 def swapRows(M, r1, r2):
     change_to_frac(M)
     M[r1], M[r2] = M[r2], M[r1]
     
+#第二种变换：某行乘以一个标量
 # TODO r1 <--- r1 * scale
 # scale为0是非法输入，要求 raise ValueError
 # 直接修改参数矩阵，无返回值
@@ -68,6 +67,7 @@ def scaleRow(M, r, scale):
     for i,ele in enumerate(M[r]):
         M[r][i] = ele * Fraction(scale)
         
+#第三种变换：r2行乘以一个标量加到r1行去        
 # TODO r1 <--- r1 + r2*scale
 # 直接修改参数矩阵，无返回值
 def addScaledRow(M, r1, r2, scale):
@@ -77,8 +77,7 @@ def addScaledRow(M, r1, r2, scale):
     for i, ele in enumerate(M[r2]):
         M[r1][i] = M[r1][i] + ele * Fraction(scale)
 
-
-
+#高斯消元函数
 def gj_Solve(A, b):
     #求矩阵第col列中第i行到第j行的元素的绝对值的最大值,同时返回所在的行号,以及实际值
     def maxAbs_rowidx_InColumn(M,col,i,j):
